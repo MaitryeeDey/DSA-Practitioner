@@ -1,4 +1,3 @@
-import java.util.Collections;
 
 public class A7nextPermutation {
     public static void helperSwap(int[] arr, int a, int b) {
