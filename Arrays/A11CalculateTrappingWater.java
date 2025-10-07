@@ -1,28 +1,29 @@
 public class A11CalculateTrappingWater {
     public static int calculateTrappingWater(int[] arr) {
-        int trappedWater = 0;
         int left = 0;
         int right = arr.length - 1;
-        int maxLeftHeight = arr[left];
-        int maxRightHeight = arr[right];
+        int leftMaxHeight = arr[0];
+        int rightMaxHeight = arr[right];
+        int trappedWater = 0;
         while (left < right) {
-            if (maxLeftHeight < maxRightHeight) {
+            if (leftMaxHeight < rightMaxHeight) {
                 left++;
-                if (maxLeftHeight < arr[left]) {
-                    maxLeftHeight = arr[left];
+                if (leftMaxHeight < arr[left]) {
+                    leftMaxHeight = arr[left];
                 } else {
-                    trappedWater += maxLeftHeight - arr[left];
+                    trappedWater += leftMaxHeight - arr[left];
                 }
             } else {
                 right--;
-                if (maxRightHeight < arr[right]) {
-                    maxRightHeight = arr[right];
+                if (rightMaxHeight < arr[right]) {
+                    rightMaxHeight = arr[right];
                 } else {
-                    trappedWater += maxRightHeight - arr[right];
+                    trappedWater += rightMaxHeight - arr[right];
                 }
             }
         }
         return trappedWater;
+
     }
 
     public static void main(String[] args) {
