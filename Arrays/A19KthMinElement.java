@@ -46,6 +46,5 @@ public class A19KthMinElement {
             arrList.add(a);
         }
         System.out.format("\n%dth smallest element is %d", 2, quickSelect(arrList, 2));
-
     }
 }
