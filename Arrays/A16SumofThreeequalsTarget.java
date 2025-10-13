@@ -56,7 +56,7 @@ public class A16SumofThreeequalsTarget {
     }
 
     // HashMap-based approach to find triplets with target sum
-    public static List<List<Integer>> findThreeSumHashMap(int[] arr, int targetSum) {
+    public static List<List<Integer>> findThreeSumHashMap1(int[] arr, int targetSum) {
         List<List<Integer>> result = new ArrayList<>();
         Set<List<Integer>> seen = new HashSet<>();
         Map<Integer, List<int[]>> map = new HashMap<>();
@@ -87,6 +87,23 @@ public class A16SumofThreeequalsTarget {
         return result;
     }
 
+    public static List<List<Integer>> findThreeSumHashMap2(int[] arr, int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                int rem = targetSum - arr[i] - arr[j];
+                if (map.containsKey(rem)) {
+                    for (int a : map.get(rem)) {
+                        result.add(new ArrayList<>(Arrays.asList(arr[a], arr[i], arr[j])));
+                    }
+                }
+            }
+            map.computeIfAbsent(arr[i], k -> new ArrayList<>()).add(i);
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         int[] arr = { 1, 2, -3, 4, -1, 0, 5, -2, 3 };
         int targetSum = 3;
@@ -100,9 +117,14 @@ public class A16SumofThreeequalsTarget {
             System.out.println(triplet);
         }
 
-        System.out.println("\nHashMap-based Triplets:");
-        List<List<Integer>> hashMapResults = findThreeSumHashMap(arr, targetSum);
-        for (List<Integer> triplet : hashMapResults) {
+        System.out.println("\nHashMap-based Triplets 1:");
+        List<List<Integer>> hashMapResults1 = findThreeSumHashMap1(arr, targetSum);
+        for (List<Integer> triplet : hashMapResults1) {
+            System.out.println(triplet);
+        }
+        System.out.println("\nHashMap-based Triplets 2:");
+        List<List<Integer>> hashMapResults2 = findThreeSumHashMap2(arr, 3);
+        for (List<Integer> triplet : hashMapResults2) {
             System.out.println(triplet);
         }
     }

@@ -71,6 +71,40 @@ public class A17PythagoreanTriplet {
         return result;
     }
 
+    public static List<List<Integer>> findPythagoreanWithTargetSum1(int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 1; i < target - 2; i++) {
+            for (int j = i + 1; j < target - 1; j++) {
+                int c = target - i - j;
+                if (c <= j) {
+                    continue;
+                }
+                if (c * c == i * i + j * j) {
+                    result.add(new ArrayList<>(Arrays.asList(i, j, c)));
+                }
+            }
+        }
+        return result;
+    }
+
+    public static List<List<Integer>> findPythagoreanWithTargetSum2(int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int a = 1; a < target - 2; a++) {
+            int num = 2 * a * a + target * target - 2 * target * a;
+            int den = 2 * (target - a);
+            if (den == 0
+                    || num % den != 0) {
+                continue;
+            }
+            int c = num / den;
+            int b = target - a - c;
+            if (b > a) {
+                result.add(new ArrayList<>(Arrays.asList(a, b, c)));
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
 
         int[] nums = { 3, 1, 4, 6, 5, 8, 10 };
@@ -96,5 +130,30 @@ public class A17PythagoreanTriplet {
         for (List<Integer> triplet : triplets3) {
             System.out.println(triplet);
         }
+
+        int targetSum = 60; // You can change this to any desired value
+
+        List<List<Integer>> tripletsForPythagorean1 = findPythagoreanWithTargetSum1(targetSum);
+
+        if (triplets.isEmpty()) {
+            System.out.println("No Pythagorean triplets found with target sum " + targetSum);
+        } else {
+            System.out.println("Pythagorean triplets with target sum " + targetSum + ":");
+
+            for (List<Integer> triplet : tripletsForPythagorean1) {
+                System.out.println(triplet);
+            }
+        }
+        List<List<Integer>> tripletsForPythagorean2 = findPythagoreanWithTargetSum2(targetSum);
+
+        if (triplets.isEmpty()) {
+            System.out.println("No Pythagorean triplets found with target sum " + targetSum);
+        } else {
+            System.out.println("Pythagorean triplets with target sum " + targetSum + ":");
+            for (List<Integer> triplet : tripletsForPythagorean2) {
+                System.out.println(triplet);
+            }
+        }
+
     }
 }
