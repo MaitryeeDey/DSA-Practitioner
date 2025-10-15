@@ -8,7 +8,8 @@ public class A22minMergeRequiredForPalindromeArray {
                 l++;
                 r--;
 
-            } else if (arr[l] < arr[r]) {
+            }
+            else if (arr[l] < arr[r]) {
                 arr[l + 1] = arr[l] + arr[l + 1];
                 mergeCount++;
                 l++;
